@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
 import { store } from "./store";
 import {
   GET_ALL_VIDEOGAMES,
@@ -13,7 +12,7 @@ import {
 
 export function getAllVideogames(pagination, page) {
   console.log(pagination, page);
-  let url = `http://localhost:3001/videogames`;
+  let url = `https://pi-games-api.onrender.com/videogames `;
   let storePage = store.getState().page;
   if (pagination === "next") {
     url = `${url}?page=${storePage + 1}`;
@@ -37,7 +36,9 @@ export function getAllVideogames(pagination, page) {
 
 export function getAllGenres() {
   return async function (dispatch) {
-    const axiosResponse = await axios.get("http://localhost:3001/genres");
+    const axiosResponse = await axios.get(
+      "https://pi-games-api.onrender.com/genres"
+    );
     const data = await axiosResponse.data;
     dispatch({
       type: GET_ALL_GENRES,
@@ -49,7 +50,7 @@ export function getAllGenres() {
 export function getAGame(id) {
   return async function (dispatch) {
     const axiosResponse = await axios.get(
-      `http://localhost:3001/videogames/${id}`
+      `https://pi-games-api.onrender.com/videogames/${id}`
     );
     const data = await axiosResponse.data;
     dispatch({
@@ -76,7 +77,7 @@ export function orderAscDesc(order) {
 export function findGames(query) {
   return async (dispatch) => {
     const axiosResponse = await axios.get(
-      `http://localhost:3001/videogames?name=${query}`
+      `https://pi-games-api.onrender.com/videogames?name=${query}`
     );
     const data = await axiosResponse.data;
     dispatch({
